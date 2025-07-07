@@ -1,43 +1,37 @@
 package dev.ens.werkzeugmanager.model;
 
-public class Machine extends Equipment{
-    private String machineType;
-    private int powerKw;
-    private String location;
+import javafx.beans.property.*;
 
-    public Machine(String id, String name, String manufacturer, String machineType, int powerKw, String location) {
+public class Machine extends Equipment {
+    private final StringProperty machineType = new SimpleStringProperty();
+    private final IntegerProperty powerKw = new SimpleIntegerProperty();
+    private final StringProperty location = new SimpleStringProperty();
+
+    public Machine(int id, String name, String manufacturer, String machineType, int powerKw, String location) {
         super(id, name, manufacturer);
-        this.machineType = machineType;
-        this.powerKw = powerKw;
-        this.location = location;
+        this.machineType.set(machineType);
+        this.powerKw.set(powerKw);
+        this.location.set(location);
     }
 
-    public String getMachineType() {
-        return machineType;
+    public Machine(int id, String name, String manufacturer, String machineType) {
+        this(id, name, manufacturer, machineType, 0, "");
     }
 
-    public void setMachineType(String machineType) {
-        this.machineType = machineType;
-    }
+    public String getMachineType() { return machineType.get(); }
+    public void setMachineType(String machineType) { this.machineType.set(machineType); }
+    public StringProperty machineTypeProperty() { return machineType; }
 
-    public int getPowerKw() {
-        return powerKw;
-    }
+    public int getPowerKw() { return powerKw.get(); }
+    public void setPowerKw(int powerKw) { this.powerKw.set(powerKw); }
+    public IntegerProperty powerKwProperty() { return powerKw; }
 
-    public void setPowerKw(int powerKw) {
-        this.powerKw = powerKw;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
+    public String getLocation() { return location.get(); }
+    public void setLocation(String location) { this.location.set(location); }
+    public StringProperty locationProperty() { return location; }
 
     @Override
     public String getDetails() {
-        return "type: " + machineType + ", powerKw: " + powerKw + ", location: " + location;
+        return "type: " + getMachineType() + ", powerKw: " + getPowerKw() + ", location: " + getLocation();
     }
 }

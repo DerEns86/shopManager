@@ -1,57 +1,42 @@
 package dev.ens.werkzeugmanager.model;
 
+import javafx.beans.property.*;
+
 public abstract class Equipment {
-    private String id;
-    private String name;
-    private String manufacturer;
-    private boolean isAvailable;
+    private final IntegerProperty id = new SimpleIntegerProperty();
+    private final StringProperty name = new SimpleStringProperty();
+    private final StringProperty manufacturer = new SimpleStringProperty();
+    private final BooleanProperty available = new SimpleBooleanProperty(true);
 
-    public Equipment(String id, String name, String manufacturer) {
-        this.id = id;
-        this.name = name;
-        this.manufacturer = manufacturer;
-        this.isAvailable = true;
+    public Equipment(int id, String name, String manufacturer) {
+        this.id.set(id);
+        this.name.set(name);
+        this.manufacturer.set(manufacturer);
     }
 
-    public String getId() {
-        return id;
-    }
+    public int getId() { return id.get(); }
+    public void setId(int id) { this.id.set(id); }
+    public IntegerProperty idProperty() { return id; }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+    public String getName() { return name.get(); }
+    public void setName(String name) { this.name.set(name); }
+    public StringProperty nameProperty() { return name; }
 
-    public String getName() {
-        return name;
-    }
+    public String getManufacturer() { return manufacturer.get(); }
+    public void setManufacturer(String manufacturer) { this.manufacturer.set(manufacturer); }
+    public StringProperty manufacturerProperty() { return manufacturer; }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getManufacturer() {
-        return manufacturer;
-    }
-
-    public void setManufacturer(String manufacturer) {
-        this.manufacturer = manufacturer;
-    }
-
-    public boolean isAvailable() {
-        return isAvailable;
-    }
-
-    public void setAvailable(boolean available) {
-        isAvailable = available;
-    }
+    public boolean isAvailable() { return available.get(); }
+    public void setAvailable(boolean available) { this.available.set(available); }
+    public BooleanProperty availableProperty() { return available; }
 
     @Override
     public String toString() {
         return "equipment{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", manufacturer='" + manufacturer + '\'' +
-                ", isAvailable=" + isAvailable +
+                "id=" + getId() +
+                ", name='" + getName() + '\'' +
+                ", manufacturer='" + getManufacturer() + '\'' +
+                ", available=" + isAvailable() +
                 '}';
     }
 

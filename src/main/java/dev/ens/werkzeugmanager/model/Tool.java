@@ -1,45 +1,33 @@
 package dev.ens.werkzeugmanager.model;
 
+import javafx.beans.property.*;
+
 public class Tool extends Equipment {
-    private String toolType;
-    private double diameter;
-    private int numberCuttingEdges;
+    private final StringProperty toolType = new SimpleStringProperty();
+    private final DoubleProperty diameter = new SimpleDoubleProperty();
+    private final IntegerProperty numberCuttingEdges = new SimpleIntegerProperty();
 
-    public Tool(String id, String name, String manufacturer, String toolType, double diameter, int numberCuttingEdges) {
+    public Tool(int id, String name, String manufacturer, String toolType, double diameter, int numberCuttingEdges) {
         super(id, name, manufacturer);
-        this.toolType = toolType;
-        this.diameter = diameter;
-        this.numberCuttingEdges = numberCuttingEdges;
+        this.toolType.set(toolType);
+        this.diameter.set(diameter);
+        this.numberCuttingEdges.set(numberCuttingEdges);
     }
 
-    public String getToolType() {
-        return toolType;
-    }
+    public String getToolType() { return toolType.get(); }
+    public void setToolType(String toolType) { this.toolType.set(toolType); }
+    public StringProperty toolTypeProperty() { return toolType; }
 
-    public void setToolType(String toolType) {
-        this.toolType = toolType;
-    }
+    public double getDiameter() { return diameter.get(); }
+    public void setDiameter(double diameter) { this.diameter.set(diameter); }
+    public DoubleProperty diameterProperty() { return diameter; }
 
-    public double getDiameter() {
-        return diameter;
-    }
-
-    public void setDiameter(double diameter) {
-        this.diameter = diameter;
-    }
-
-    public int getNumberCuttingEdges() {
-        return numberCuttingEdges;
-    }
-
-    public void setNumberCuttingEdges(int numberCuttingEdges) {
-        this.numberCuttingEdges = numberCuttingEdges;
-    }
-
-
+    public int getNumberCuttingEdges() { return numberCuttingEdges.get(); }
+    public void setNumberCuttingEdges(int numberCuttingEdges) { this.numberCuttingEdges.set(numberCuttingEdges); }
+    public IntegerProperty numberCuttingEdgesProperty() { return numberCuttingEdges; }
 
     @Override
     public String getDetails() {
-        return "type: " + toolType + ", diameter: " + diameter + "mm, numberOfCuttingEdges: " + numberCuttingEdges;
+        return "type: " + getToolType() + ", diameter: " + getDiameter() + "mm, numberOfCuttingEdges: " + getNumberCuttingEdges();
     }
 }
